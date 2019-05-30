@@ -77,7 +77,7 @@ class ReflectionBasedAutowiring implements DefinitionSource, Autowiring
                 continue;
             }
 
-			$parameters[$index] = new Reference($parameterType->getName(), $className);
+            $parameters[$index] = new Reference($parameterType->getName(), $className);
         }
 
         return $parameters;
