@@ -23,6 +23,11 @@ class SourceCache implements DefinitionSource, MutableDefinitionSource
      */
     private $cachedSource;
 
+    /**
+     * @var string|null
+     */
+    private static $cachePrefix;
+
     public function __construct(DefinitionSource $cachedSource)
     {
         $this->cachedSource = $cachedSource;
@@ -30,14 +35,14 @@ class SourceCache implements DefinitionSource, MutableDefinitionSource
 
     public function getDefinition(string $name)
     {
-        $definition = apcu_fetch(self::CACHE_KEY . $name);
+        $definition = apcu_fetch($this->getCacheKey() . $name);
 
         if ($definition === false) {
             $definition = $this->cachedSource->getDefinition($name);
 
             // Update the cache
             if ($this->shouldBeCached($definition)) {
-                apcu_store(self::CACHE_KEY . $name, $definition);
+                apcu_store($this->getCacheKey() . $name, $definition);
             }
         }
 
@@ -57,6 +62,30 @@ class SourceCache implements DefinitionSource, MutableDefinitionSource
         return function_exists('apcu_fetch')
             && ini_get('apc.enabled')
             && ! ('cli' === \PHP_SAPI && ! ini_get('apc.enable_cli'));
+    }
+
+    /**
+     * @return string
+     */
+    public function getCacheKey() : string
+    {
+        return self::getCachePrefix() . self::CACHE_KEY;
+    }
+
+    /**
+     * @param string|null $cachePrefix
+     */
+    public static function setCachePrefix($cachePrefix)
+    {
+        self::$cachePrefix = $cachePrefix;
+    }
+
+    /**
+     * @return string|null
+     */
+    public static function getCachePrefix()
+    {
+        return self::$cachePrefix;
     }
 
     public function addDefinition(Definition $definition)
