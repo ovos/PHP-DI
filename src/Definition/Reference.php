@@ -72,7 +72,6 @@ class Reference implements Definition, SelfResolvingDefinition
 
     /**
      * Returns the name of the entity requesting this entry.
-     * @return string
      */
     public function getRequestingName() : string
     {
