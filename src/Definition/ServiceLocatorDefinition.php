@@ -48,7 +48,6 @@ class ServiceLocatorDefinition implements Definition, SelfResolvingDefinition
 
     /**
      * Returns the name of the holder of the definition requesting service locator.
-     * @return string
      */
     public function getRequestingName() : string
     {
@@ -58,7 +57,6 @@ class ServiceLocatorDefinition implements Definition, SelfResolvingDefinition
     /**
      * Resolve the definition and return the resulting value.
      *
-     * @param ContainerInterface $container
      * @return ServiceLocator
      * @throws ServiceSubscriberException
      */
@@ -77,8 +75,6 @@ class ServiceLocatorDefinition implements Definition, SelfResolvingDefinition
 
     /**
      * Check if a definition can be resolved.
-     * @param ContainerInterface $container
-     * @return bool
      */
     public function isResolvable(ContainerInterface $container) : bool
     {

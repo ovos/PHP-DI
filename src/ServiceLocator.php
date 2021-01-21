@@ -34,8 +34,6 @@ class ServiceLocator implements ContainerInterface
 
     /**
      * Constructor.
-     * @param ContainerInterface $container
-     * @param array $services
      * @param string|null $subscriber className of a ServiceSubscriber to which this service locator instance belongs to
      */
     public function __construct(ContainerInterface $container, array $services, string $subscriber = null)
@@ -45,9 +43,6 @@ class ServiceLocator implements ContainerInterface
         $this->setServices($services);
     }
 
-    /**
-     * @param array $services
-     */
     protected function setServices(array $services)
     {
         foreach ($services as $key => $value) {
@@ -60,7 +55,6 @@ class ServiceLocator implements ContainerInterface
 
     /**
      * Get defined services.
-     * @return array
      */
     public function getServices() : array
     {
@@ -69,7 +63,6 @@ class ServiceLocator implements ContainerInterface
 
     /**
      * Get name of a class to which this service locator instance belongs to.
-     * @return string
      */
     public function getSubscriber() : string
     {

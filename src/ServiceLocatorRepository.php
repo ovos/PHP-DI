@@ -26,7 +26,6 @@ class ServiceLocatorRepository implements ContainerInterface
 
     /**
      * Constructor.
-     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -35,10 +34,6 @@ class ServiceLocatorRepository implements ContainerInterface
 
     /**
      * Create or modify service locator.
-     *
-     * @param string $entry
-     * @param array $services
-     * @return ServiceLocator
      */
     public function create(string $entry, array $services = []) : ServiceLocator
     {
@@ -71,9 +66,6 @@ class ServiceLocatorRepository implements ContainerInterface
      * Override a single service for a service locator.
      * This can be only used before the service locator for the given entry is created.
      *
-     * @param string $entry
-     * @param string $serviceId
-     * @param string|null $serviceEntry
      * @return $this
      */
     public function override(string $entry, string $serviceId, string $serviceEntry = null)
@@ -95,7 +87,6 @@ class ServiceLocatorRepository implements ContainerInterface
     /**
      * Get a service locator for an entry.
      * @param string $entry
-     * @return ServiceLocator
      * @throws NotFoundException
      */
     public function get($entry) : ServiceLocator
