@@ -16,7 +16,6 @@ class AutowireDefinition extends ObjectDefinition
 
     /**
      * Enable/disable reading annotations for this definition, regardless of a container configuration.
-     * @param bool $flag
      */
     public function useAnnotations(bool $flag = true)
     {
